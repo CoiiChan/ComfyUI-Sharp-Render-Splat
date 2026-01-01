@@ -18,7 +18,7 @@ ComfyUI自定义节点插件，用于将Apple ml sharp PLY Gaussian Splat文件�
 
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/your-repo/ComfyUI-Sharp-Render-Splat.git
+git clone https://github.com/CoiiChan/ComfyUI-Sharp-Render-Splat.git
 ```
 
 ### 2. 安装Python依赖
