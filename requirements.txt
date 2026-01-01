@@ -1,0 +1,7 @@
+# Python dependencies for ComfyUI-Sharp-Render-Splat
+# Note: torch and numpy are typically already installed by ComfyUI
+# but are listed here for completeness
+
+torch>=1.13.0
+numpy>=1.21.0
+Pillow>=9.0.0

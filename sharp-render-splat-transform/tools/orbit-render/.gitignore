@@ -1,0 +1,5 @@
+node_modules/
+frames/
+*.log
+.temp_splat_render/
+.DS_Store

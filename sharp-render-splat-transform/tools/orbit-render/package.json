@@ -1,0 +1,25 @@
+{
+  "name": "splat-orbit-render",
+  "version": "1.0.0",
+  "description": "Command-line tool for rendering orbit sequences from PLY Gaussian splat files",
+  "type": "module",
+  "main": "index.mjs",
+  "bin": {
+    "splat-orbit-render": "./index.mjs"
+  },
+  "scripts": {
+    "start": "node index.mjs",
+    "install": "echo \"Skipping Chromium download\""
+  },
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "puppeteer": {
+    "skipDownload": true
+  }
+}

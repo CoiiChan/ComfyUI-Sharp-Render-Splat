@@ -1,0 +1,171 @@
+import { dirname, basename, join } from 'node:path';
+
+import { html, css, js } from '@playcanvas/supersplat-viewer';
+
+import { writeSog } from './write-sog';
+import { DataTable } from '../data-table/data-table';
+import { FileSystem } from '../serialize/file-system';
+import { MemoryFileSystem } from '../serialize/memory-file-system';
+import { writeFile } from '../serialize/write-helpers';
+import { toBase64 } from '../utils/base64';
+
+type ViewerSettings = {
+    camera?: {
+        fov?: number;
+        position?: [number, number, number];
+        target?: [number, number, number];
+        startAnim?: string;
+        animTrack?: string;
+    };
+    background?: {
+        color?: [number, number, number];
+    };
+    animTracks?: unknown[];
+};
+
+type WriteHtmlOptions = {
+    filename: string;
+    dataTable: DataTable;
+    viewerSettingsJson?: any;
+    bundle: boolean;
+    iterations: number;
+    deviceIdx: number;
+};
+
+const writeHtml = async (options: WriteHtmlOptions, fs: FileSystem) => {
+    const { filename, dataTable, viewerSettingsJson, bundle, iterations, deviceIdx } = options;
+
+    const pad = (text: string, spaces: number) => {
+        const whitespace = ' '.repeat(spaces);
+        return text.split('\n').map(line => whitespace + line).join('\n');
+    };
+
+    // Load viewer settings from file if provided
+    const viewerSettings = (viewerSettingsJson ?? {})as ViewerSettings;
+
+    // Default orbit radius for animTrack
+    const defaultOrbitRadius = 2;
+
+    // Merge provided settings with defaults
+    const mergedSettings = {
+        camera: {
+            fov: 50,
+            position: [2, 2, -2] as [number, number, number],
+            target: [0, 0, 0] as [number, number, number],
+            startAnim: 'animTrack',
+            animTrack: 'Orbit Track' as string,
+            ...viewerSettings.camera
+        },
+        background: {
+            color: [0, 0, 0] as [number, number, number],
+            ...viewerSettings.background
+        },
+        animTracks: viewerSettings.animTracks ?? [
+            {
+                name: 'Orbit Track',
+                duration: 10,
+                frameRate: 30,
+                loopMode: 'loop',
+                interpolation: 'linear',
+                smoothness: 0,
+                keyframes: {
+                    times: [0, 0.25, 0.5, 0.75, 1],
+                    values: {
+                        position: [
+                            defaultOrbitRadius * Math.sin((173 * Math.PI) / 180),
+                            0,
+                            defaultOrbitRadius * Math.cos((173 * Math.PI) / 180) + 2,
+                            defaultOrbitRadius * Math.sin((176.5 * Math.PI) / 180),
+                            0,
+                            defaultOrbitRadius * Math.cos((176.5 * Math.PI) / 180) + 2,
+                            defaultOrbitRadius * Math.sin((180 * Math.PI) / 180),
+                            0,
+                            defaultOrbitRadius * Math.cos((180 * Math.PI) / 180) + 2,
+                            defaultOrbitRadius * Math.sin((183.5 * Math.PI) / 180),
+                            0,
+                            defaultOrbitRadius * Math.cos((183.5 * Math.PI) / 180) + 2,
+                            defaultOrbitRadius * Math.sin((187 * Math.PI) / 180),
+                            0,
+                            defaultOrbitRadius * Math.cos((187 * Math.PI) / 180) + 2
+                        ],
+                        target: [
+                            0, 0, 2,
+                            0, 0, 2,
+                            0, 0, 2,
+                            0, 0, 2,
+                            0, 0, 2
+                        ],
+                        fov: [50, 50, 50, 50, 50]
+                    }
+                }
+            }
+        ]
+    };
+
+    if (bundle) {
+        // Bundled mode: embed everything in the HTML
+        const memoryFs = new MemoryFileSystem();
+
+        const sogFilename = 'temp.sog';
+        await writeSog({
+            filename: sogFilename,
+            dataTable,
+            bundle: true,
+            iterations,
+            deviceIdx
+        }, memoryFs);
+
+        // get the memory buffer
+        const sogData = toBase64(memoryFs.results.get(sogFilename));
+
+        const style = '<link rel="stylesheet" href="./index.css">';
+        const script = 'import { main } from \'./index.js\';';
+        const settings = 'settings: fetch(settingsUrl).then(response => response.json())';
+        const content = 'fetch(contentUrl)';
+
+        const resultHtml = html
+        .replace(style, `<style>\n${pad(css, 12)}\n        </style>`)
+        .replace(script, js)
+        .replace(settings, `settings: Promise.resolve(${JSON.stringify(mergedSettings)})`)
+        .replace(content, `fetch("data:application/octet-stream;base64,${sogData}")`)
+        .replace('.compressed.ply', '.sog');
+
+        await writeFile(fs, filename, resultHtml);
+    } else {
+        // Unbundled mode: write separate files
+        const outputDir = dirname(filename);
+        const baseFilename = basename(filename, '.html');
+        const sogFilename = `${baseFilename}.sog`;
+        const sogPath = join(outputDir, sogFilename);
+
+        // Write .sog file
+        await writeSog({
+            filename: sogPath,
+            dataTable,
+            bundle: true,
+            iterations,
+            deviceIdx
+        }, fs);
+
+        // Write CSS file
+        const cssPath = join(outputDir, 'index.css');
+        await writeFile(fs, cssPath, css);
+
+        // Write JS file
+        const jsPath = join(outputDir, 'index.js');
+        await writeFile(fs, jsPath, js);
+
+        // Generate HTML with external references
+        const settings = 'settings: fetch(settingsUrl).then(response => response.json())';
+        const content = 'fetch(contentUrl)';
+
+        const resultHtml = html
+        .replace(settings, `settings: Promise.resolve(${JSON.stringify(mergedSettings)})`)
+        .replace(content, `fetch("${sogFilename}")`)
+        .replace('.compressed.ply', '.sog');
+
+        await writeFile(fs, filename, resultHtml);
+    }
+};
+
+export { writeHtml };

@@ -1,0 +1,60 @@
+{
+  "presets": {
+    "quick_preview": {
+      "description": "快速预览（18帧，720p）",
+      "frames": 18,
+      "width": 1280,
+      "height": 720,
+      "radius": 3,
+      "cameraHeight": 1.5,
+      "fov": 60
+    },
+    "standard": {
+      "description": "标准视频（36帧，1080p）",
+      "frames": 36,
+      "width": 1920,
+      "height": 1080,
+      "radius": 5,
+      "cameraHeight": 2,
+      "fov": 50
+    },
+    "high_quality": {
+      "description": "高质量（72帧，1080p）",
+      "frames": 72,
+      "width": 1920,
+      "height": 1080,
+      "radius": 8,
+      "cameraHeight": 2.5,
+      "fov": 45
+    },
+    "4k_video": {
+      "description": "4K视频（120帧，4K）",
+      "frames": 120,
+      "width": 3840,
+      "height": 2160,
+      "radius": 10,
+      "cameraHeight": 3,
+      "fov": 45
+    },
+    "top_down": {
+      "description": "顶部俯视（36帧，1080p）",
+      "frames": 36,
+      "width": 1920,
+      "height": 1080,
+      "radius": 5,
+      "cameraHeight": 10,
+      "fov": 50,
+      "target": [0, 0, 0]
+    },
+    "close_up": {
+      "description": "近距离特写（72帧，1080p）",
+      "frames": 72,
+      "width": 1920,
+      "height": 1080,
+      "radius": 2,
+      "cameraHeight": 1,
+      "fov": 60,
+      "target": [0, 0.5, 0]
+    }
+  }
+}
