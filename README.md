@@ -1,3 +1,8 @@
+## 在线演示
+
+- [主页面](https://coiichan.github.io/Sharp-2-Html-Demo/)
+- [Titanic Demo](https://coiichan.github.io/Sharp-2-Html-Demo/titanic/)
+
 # ComfyUI-Sharp-Render-Splat
 
 ComfyUI自定义节点插件，用于将Apple ml sharp PLY Gaussian Splat文件渲染为图像序列或HTML查看器。基于[PlayCanvas SplatTransform](https://github.com/playcanvas/splat-transform)项目开发，专门针对Apple的[ml-sharp](https://github.com/apple/ml-sharp)模型生成的PLY文件进行了坐标系适配。
