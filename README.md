@@ -1,7 +1,7 @@
 ## 在线演示
 
 - [SingleFrame](https://coiichan.github.io/Sharp-2-Html-Demo/)
-- [Titanic Demo](https://coiichan.github.io/Sharp-2-Html-Demo/titanic/)
+- [Titanic Demo](https://coiichan.github.io/Sharp-2-Html-Demo/titanic/) 全部95帧，请注意流量消耗
 
 # ComfyUI-Sharp-Render-Splat
 
