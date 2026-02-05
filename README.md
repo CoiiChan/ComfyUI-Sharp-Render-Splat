@@ -1,6 +1,6 @@
 ## 在线演示
 
-- [主页面](https://coiichan.github.io/Sharp-2-Html-Demo/)
+- [SingleFrame](https://coiichan.github.io/Sharp-2-Html-Demo/)
 - [Titanic Demo](https://coiichan.github.io/Sharp-2-Html-Demo/titanic/)
 
 # ComfyUI-Sharp-Render-Splat
