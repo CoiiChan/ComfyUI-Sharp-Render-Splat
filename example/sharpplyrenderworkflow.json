@@ -1,60 +1,112 @@
 {
   "id": "533bd07b-ac13-4fa7-81e0-62a5dd28b601",
   "revision": 0,
-  "last_node_id": 7,
-  "last_link_id": 6,
+  "last_node_id": 382,
+  "last_link_id": 71,
   "nodes": [
     {
-      "id": 6,
-      "type": "LoadImageWithExif",
+      "id": 2,
+      "type": "easy showAnything",
       "pos": [
-        -618.9645923472757,
-        -1691.953111563795
+        -256.58051863002675,
+        -1772.988184261474
       ],
       "size": [
-        342.2955078125,
-        358.0000000000001
+        267.5116843012031,
+        90.62199883829999
       ],
       "flags": {},
-      "order": 0,
+      "order": 4,
       "mode": 0,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 15
+        }
+      ],
       "outputs": [
         {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            3
-          ]
-        },
-        {
-          "name": "mask",
-          "type": "MASK",
-          "links": null
-        },
-        {
-          "name": "focal_length_mm",
-          "type": "FLOAT",
+          "name": "output",
+          "type": "*",
           "links": []
         }
       ],
       "properties": {
-        "Node name for S&R": "LoadImageWithExif",
+        "cnr_id": "comfyui-easy-use",
+        "ver": "4f694195a28c20ace34cd0ed5e747bebaf5cb8a7",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "S:\\my_project\\ComfyUI_v600cu128\\ComfyUI\\output\\sharp_1769699200554"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 5,
+      "type": "SharpPredict",
+      "pos": [
+        -268.40965251418714,
+        -1941.774127478119
+      ],
+      "size": [
+        298.9009765625,
+        122
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "SHARP_MODEL",
+          "link": 5
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 68
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ply_path",
+          "type": "STRING",
+          "links": [
+            15,
+            37,
+            70
+          ]
+        },
+        {
+          "name": "extrinsics",
+          "type": "EXTRINSICS",
+          "links": []
+        },
+        {
+          "name": "intrinsics",
+          "type": "INTRINSICS",
+          "links": []
+        }
+      ],
+      "properties": {
         "aux_id": "PozzettiAndrea/ComfyUI-Sharp",
+        "Node name for S&R": "SharpPredict",
         "ver": "c69751a59b587c3b83d0e37cfe2bab3bc838574a"
       },
       "widgets_values": [
-        "生成特定图片 (10).png",
-        30,
-        "image"
+        45,
+        "TitanicPly"
       ]
     },
     {
       "id": 7,
       "type": "LoadSharpModel",
       "pos": [
-        -551.5491715640029,
-        -1854.5958180191076
+        -576.6164989205096,
+        -1940.598463385933
       ],
       "size": [
         270,
@@ -74,8 +126,8 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LoadSharpModel",
         "aux_id": "PozzettiAndrea/ComfyUI-Sharp",
+        "Node name for S&R": "LoadSharpModel",
         "ver": "9f1b9c726e2cfc0118866c3df783e7f6bc895226"
       },
       "widgets_values": [
@@ -84,81 +136,66 @@
       ]
     },
     {
-      "id": 5,
-      "type": "SharpPredict",
+      "id": 361,
+      "type": "SharpPLYToHTML",
       "pos": [
-        -256.7417576837526,
-        -1714.9712279651778
+        73.96355452455911,
+        -1942.914130872529
       ],
       "size": [
-        298.9009765625,
-        122
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "SHARP_MODEL",
-          "link": 5
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 3
-        }
-      ],
-      "outputs": [
-        {
-          "name": "ply_path",
-          "type": "STRING",
-          "links": [
-            4,
-            6
-          ]
-        },
-        {
-          "name": "extrinsics",
-          "type": "EXTRINSICS",
-          "links": []
-        },
-        {
-          "name": "intrinsics",
-          "type": "INTRINSICS",
-          "links": []
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "SharpPredict",
-        "aux_id": "PozzettiAndrea/ComfyUI-Sharp",
-        "ver": "c69751a59b587c3b83d0e37cfe2bab3bc838574a"
-      },
-      "widgets_values": [
-        45,
-        "sharp"
-      ]
-    },
-    {
-      "id": 2,
-      "type": "easy showAnything",
-      "pos": [
-        392.34041525508314,
-        -1850.314175042144
-      ],
-      "size": [
-        336.9946535161514,
-        88
+        270,
+        106
       ],
       "flags": {},
       "order": 5,
       "mode": 0,
       "inputs": [
         {
+          "name": "ply_path",
+          "type": "STRING",
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "html_path",
+          "type": "STRING",
+          "links": [
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "CoiiChan/ComfyUI-Sharp-Render-Splat",
+        "ver": "eb8896a6e83a52dad97592810472b5aa9a4878d0",
+        "Node name for S&R": "SharpPLYToHTML"
+      },
+      "widgets_values": [
+        "Titanic_Splat\\Titanic",
+        "",
+        "False"
+      ]
+    },
+    {
+      "id": 362,
+      "type": "easy showAnything",
+      "pos": [
+        381.227746589243,
+        -1945.3560141764349
+      ],
+      "size": [
+        210,
+        88
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
           "name": "anything",
           "shape": 7,
           "type": "*",
-          "link": 1
+          "link": 33
         }
       ],
       "outputs": [
@@ -169,96 +206,72 @@
         }
       ],
       "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "4f694195a28c20ace34cd0ed5e747bebaf5cb8a7",
         "Node name for S&R": "easy showAnything"
       },
       "widgets_values": [
-        "S:\\ComfyuiUserData\\output\\splat_html_1767262989.html"
+        "S:\\ComfyuiUserData\\output\\splat_4d_1769677148.html"
       ]
     },
     {
-      "id": 4,
-      "type": "PreviewImage",
+      "id": 379,
+      "type": "LoadImage",
       "pos": [
-        396.1679487643402,
-        -1581.5413419200195
-      ],
-      "size": [
-        325.92355398854374,
-        258
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 2
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      },
-      "widgets_values": []
-    },
-    {
-      "id": 1,
-      "type": "SharpPLYToHTML",
-      "pos": [
-        77.1154427766858,
-        -1852.236084361751
+        -579.0239722809067,
+        -1785.9115420560988
       ],
       "size": [
         270,
-        82
+        314
       ],
       "flags": {},
-      "order": 3,
+      "order": 0,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "ply_path",
-          "type": "STRING",
-          "link": 4
-        }
-      ],
+      "inputs": [],
       "outputs": [
         {
-          "name": "html_path",
-          "type": "STRING",
+          "name": "IMAGE",
+          "type": "IMAGE",
           "links": [
-            1
+            68
           ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
         }
       ],
       "properties": {
-        "Node name for S&R": "SharpPLYToHTML"
+        "cnr_id": "comfy-core",
+        "ver": "0.6.0",
+        "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "splat_html",
-        ""
+        "005_00001_.png",
+        "image"
       ]
     },
     {
-      "id": 3,
+      "id": 380,
       "type": "SharpPLYToImages",
       "pos": [
-        64.0207790990485,
-        -1579.2835891561722
+        73.80337663636736,
+        -1760.7586465571492
       ],
       "size": [
         270,
         250
       ],
       "flags": {},
-      "order": 4,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
           "name": "ply_path",
           "type": "STRING",
-          "link": 6
+          "link": 70
         }
       ],
       "outputs": [
@@ -266,59 +279,83 @@
           "name": "image",
           "type": "IMAGE",
           "links": [
-            2
+            71
           ]
         }
       ],
       "properties": {
+        "aux_id": "CoiiChan/ComfyUI-Sharp-Render-Splat",
+        "ver": "eb8896a6e83a52dad97592810472b5aa9a4878d0",
         "Node name for S&R": "SharpPLYToImages"
       },
       "widgets_values": [
-        1920,
-        1080,
-        45,
-        5,
+        1536,
+        1536,
+        40,
+        6,
         2,
         0,
         0,
         1,
-        30
+        14
       ]
+    },
+    {
+      "id": 381,
+      "type": "SaveImage",
+      "pos": [
+        379.7321336538688,
+        -1763.8573724569576
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 71
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.6.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "SharpRenderSplate/ComfyUI"
+      ]
+    },
+    {
+      "id": 382,
+      "type": "MarkdownNote",
+      "pos": [
+        -1042.179798567806,
+        -1932.592545865426
+      ],
+      "size": [
+        426.4902012347367,
+        237.80060749732365
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## 在线演示\n\n- [SingleFrame](https://coiichan.github.io/Sharp-2-Html-Demo/)\n- [Titanic Demo](https://coiichan.github.io/Sharp-2-Html-Demo/titanic/) 全部95帧，请注意流量消耗\n## B站视频\n### [《mlsharp深入体验 我搓了个ComfyUI插件把点云转网页》](https://www.bilibili.com/video/BV1UyF6zyEtP/?share_source=copy_web&vd_source=1c57dc7cdf54f8ff72e388fe31031e2a)\n\n# ComfyUI-Sharp-Render-Splat\n\nComfyUI自定义节点插件，用于将Apple ml sharp PLY Gaussian Splat文件渲染为图像序列或HTML查看器。请自行安装\n[https://github.com/CoiiChan/ComfyUI-Sharp-Render-Splat](https://github.com/CoiiChan/ComfyUI-Sharp-Render-Splat)"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
     }
   ],
   "links": [
-    [
-      1,
-      1,
-      0,
-      2,
-      0,
-      "STRING"
-    ],
-    [
-      2,
-      3,
-      0,
-      4,
-      0,
-      "IMAGE"
-    ],
-    [
-      3,
-      6,
-      0,
-      5,
-      1,
-      "IMAGE"
-    ],
-    [
-      4,
-      5,
-      0,
-      1,
-      0,
-      "STRING"
-    ],
     [
       5,
       7,
@@ -328,26 +365,70 @@
       "SHARP_MODEL"
     ],
     [
-      6,
+      15,
       5,
       0,
-      3,
+      2,
       0,
       "STRING"
+    ],
+    [
+      33,
+      361,
+      0,
+      362,
+      0,
+      "STRING"
+    ],
+    [
+      37,
+      5,
+      0,
+      361,
+      0,
+      "STRING"
+    ],
+    [
+      68,
+      379,
+      0,
+      5,
+      1,
+      "IMAGE"
+    ],
+    [
+      70,
+      5,
+      0,
+      380,
+      0,
+      "STRING"
+    ],
+    [
+      71,
+      380,
+      0,
+      381,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1.0152559799477165,
+      "scale": 0.839054528882437,
       "offset": [
-        794.7685936648103,
-        2155.163678941761
+        1232.2217238662201,
+        2241.54925254362
       ]
     },
     "workflowRendererVersion": "LG",
-    "frontendVersion": "1.34.9"
+    "frontendVersion": "1.34.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
   },
   "version": 0.4
 }
