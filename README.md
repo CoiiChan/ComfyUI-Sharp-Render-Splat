@@ -9,7 +9,7 @@
 
 ComfyUI自定义节点插件，用于将Apple ml sharp PLY Gaussian Splat文件渲染为图像序列或HTML查看器。基于[PlayCanvas SplatTransform](https://github.com/playcanvas/splat-transform)项目开发，专门针对Apple的[ml-sharp](https://github.com/apple/ml-sharp)模型生成的PLY文件进行了坐标系适配。
 
-[![workflow](https://github.com/CoiiChan/ComfyUI-Sharp-Render-Splat/blob/6590d9aaa7cacfca420425ff0e398963008373b3/example/workflowscreenshot.png)
+[workflow](https://github.com/CoiiChan/ComfyUI-Sharp-Render-Splat/blob/6590d9aaa7cacfca420425ff0e398963008373b3/example/workflowscreenshot.png)
 ## 功能特性
 
 - 🎬 **PLY转图像序列**：将PLY文件渲染为环绕相机动画的图像序列
